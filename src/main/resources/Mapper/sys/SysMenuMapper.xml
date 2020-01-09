@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.pj.sys.dao.SysMenuDao">
+
+<!-- 菜单数据呈现 -->
+<select id="findObjects" resultType="map">
+select c.* ,(
+	select p.name
+	from sys_menus p
+	where c.parentId=p.id
+	)parentName
+from sys_menus c
+</select>
+
+<!-- 请求获取数据库对应的菜单表中的所有菜单信息(id,name,parentId) -->
+<select id="findZtreeMenuNodes" resultType="com.cy.pj.common.vo.Node">
+select id,name,parentId
+from sys_menus
+</select>
+
+<!--  -->
+</mapper>
